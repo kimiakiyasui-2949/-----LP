@@ -1,0 +1,646 @@
+/* =============================
+   RESET
+============================= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+  background: #fff;
+  color: #222;
+}
+
+/* =============================
+   SECTION
+============================= */
+.section {
+  min-height: 100svh; /* iPhone対策 */
+  padding: 24px 20px calc(80px + env(safe-area-inset-bottom));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* =============================
+   BACKGROUND VIDEO
+============================= */
+.bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* =============================
+   HERO
+============================= */
+.hero {
+  color: #fff;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 24px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+}
+
+/* =============================
+   横スワイププラン
+============================= */
+.plans {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 20px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.plans::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  min-width: 85%;
+  background: #f7f7f7;
+  padding: 24px;
+  border-radius: 24px;
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.card:active {
+  transform: scale(0.97);
+}
+
+/* =============================
+   GALLERY
+============================= */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* =============================
+   PROCESS
+============================= */
+.process-step {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  animation: fade 0.5s ease;
+}
+
+.process-step.active {
+  display: flex;
+}
+
+.process-step video {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* =============================
+   MATCHA
+============================= */
+.matcha-overlay {
+  background: rgba(0, 0, 0, 0.65);
+  padding: 24px;
+  border-radius: 24px;
+  backdrop-filter: blur(4px);
+  color: #fff;
+}
+
+.badge {
+  background: linear-gradient(45deg, gold, orange);
+  color: #000;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 12px;
+  margin-bottom: 12px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+/* =============================
+   REVIEW
+============================= */
+.review-video {
+  position: relative;
+}
+
+.review-video video {
+  width: 100%;
+  border-radius: 24px;
+}
+
+.review-text {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+/* =============================
+   BEFORE AFTER
+============================= */
+.before-after {
+  margin-top: 24px;
+}
+
+.img-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  width: 100%;
+  display: block;
+}
+
+.before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* =============================
+   FINAL CTA
+============================= */
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 20px 200px; /* 下に余白を作る */
+  text-align: center;
+  color: white;
+  background: #000; /* 万一動画が読み込まれない時用 */
+}
+
+/* 動画を下に配置して重ねる */
+.cta-bg-video {
+  position: absolute;
+  bottom: 0;        /* ← 下に固定 */
+  left: 0;
+  width: 100%;
+  height: 60%;      /* ← 下だけ動画にする */
+  object-fit: cover;
+  z-index: 1;
+  filter: brightness(0.7);
+}
+
+/* テキストを上に */
+.cta-overlay {
+  position: relative;
+  z-index: 2;
+}
+
+/* =============================
+   下固定CTAバー
+============================= */
+.bottom-bar button {
+  width: 100%;
+  padding: 18px;
+  border-radius: 50px;
+  border: none;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #ff0057, #ff7a00);
+  box-shadow: 
+    0 10px 25px rgba(255, 0, 87, 0.35),
+    inset 0 2px 5px rgba(255,255,255,0.4);
+
+  transition: all 0.25s ease;
+}
+
+.bottom-bar button:active {
+  transform: translateY(3px) scale(0.98);
+  box-shadow: 
+    0 5px 15px rgba(255, 0, 87, 0.25),
+    inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* =============================
+   ANIMATION
+============================= */
+@keyframes fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* ============================
+   スマホ最適化
+============================ */
+@media (max-width: 768px) {
+
+  body {
+    font-size: 16px;
+  }
+
+  .section {
+    padding: 70px 15px;
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 1.4;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 40px;
+  }
+
+  /* =====================
+     ヒーロー
+  ===================== */
+  .hero {
+    height: 90vh;
+  }
+
+  .overlay {
+    padding: 25px;
+    border-radius: 15px;
+  }
+
+  /* =====================
+     プランカード
+  ===================== */
+
+  /* =============================
+   横スワイププラン（本格版）
+============================= */
+
+.plans {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 10px 30px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.plans::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  min-width: 85%;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+
+  background: #f7f7f7;
+  padding: 30px 20px;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+  transition: transform 0.3s ease;
+}
+
+.card:active {
+  transform: scale(0.96);
+}
+.plans-section {
+  padding: 40px 0;
+}
+.plans-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.plans-slider::-webkit-scrollbar {
+  display: none;
+}
+.plan-card {
+  flex: 0 0 85%;
+  height: 70vh; /* ← スマホにちょうど良い高さ */
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  scroll-snap-align: center;
+}
+/* カードを基準にする */
+.plan-card {
+  position: relative;
+  flex: 0 0 85%;
+  height: 70vh;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* 動画を全面背景に */
+.plan-card video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.6); /* 文字を見やすく */
+}
+
+/* 文字を動画の上に重ねる */
+.plan-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: white;
+  width: 90%;
+}
+
+  /* =====================
+     ギャラリー
+  ===================== */
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .gallery img {
+    border-radius: 12px;
+  }
+
+  /* =====================
+     体験の流れ
+  ===================== */
+  .process video {
+    width: 100%;
+  }
+
+  .process-controls button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .narration {
+    font-size: 16px;
+  }
+
+  /* =====================
+     抹茶セクション
+  ===================== */
+  .matcha-overlay {
+    padding: 70px 15px;
+  }
+
+  .main-copy {
+    font-size: 18px;
+  }
+
+  .sub-copy {
+    font-size: 15px;
+  }
+
+  /* =====================
+     口コミ
+  ===================== */
+  .review-video video {
+    width: 100%;
+  }
+
+  .review-text {
+    font-size: 18px;
+  }
+
+  .img-wrapper {
+    margin: 30px auto;
+  }
+
+  /* =====================
+     CTA
+  ===================== */
+  /* CTA全体 */
+.final-cta {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+/* CTA全体 */
+.final-cta {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+}
+
+/* 背景動画 */
+.cta-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.7);
+}
+
+/* 半透明黒ボックス（中央） */
+.cta-overlay {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);  /* ← 半透明黒 */
+  padding: 40px 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);      /* 高級感ぼかし */
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+}v
+
+/* メイン見出し */
+.cta-overlay h2 {
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* サブテキスト */
+.cta-overlay > p {
+  font-size: clamp(18px, 3vw, 28px);
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+/* 特典 */
+.benefits p {
+  font-size: clamp(16px, 2.5vw, 22px);
+  margin: 8px 0;
+}
+  /* =====================
+     下固定ボタン
+  ===================== */
+  .bottom-bar {
+    padding: 12px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .bottom-bar button {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px;
+  }
+
+}
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* LINEボタン */
+.line-btn {
+  background: #06C755;
+  color: white;
+  padding: 18px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.line-btn:hover {
+  transform: scale(1.05);
+}
+
+/* フォームボタン */
+.form-btn {
+  background: white;
+  color: black;
+  padding: 18px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.form-btn:hover {
+  transform: scale(1.05);
+}
+/* =============================
+   PROCESS 本格コントロール
+============================= */
+
+.process-controls {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.process-controls button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+
+  background: rgba(138, 201, 12, 0.6);
+  backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.25),
+    inset 0 2px 5px rgba(255,255,255,0.3);
+
+  transition: all 0.25s ease;
+}
+
+.process-controls button:hover {
+  transform: translateY(-3px);
+}
+
+.process-controls button:active {
+  transform: scale(0.9);
+}
+
+.process-controls button.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+/* =============================
+   BEFORE AFTER LABEL
+============================= */
+
+.ba-label {
+  margin-top: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.ba-label.fade {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.ba-label.before-text {
+  color: #e6005c;
+}
+
+.ba-label.after-text {
+  color: #06c755;
+}
